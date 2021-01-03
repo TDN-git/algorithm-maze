@@ -123,7 +123,7 @@ def BFS(x,y,n):
     solution[x,y] = x,y
 
     while len(frontier) > 0:          # exit while loop when frontier queue equals zero
-        #time.sleep(0.2)
+        time.sleep(0.2)
         x, y = frontier.popleft()     # pop next entry in the frontier queue an assign to x and y location
 
         if(x - 24, y) in path and (x - 24, y) not in visited:  # check the cell on the left
@@ -234,6 +234,7 @@ with open("map.txt") as file:
     for line in file:
         if m == 0:
             m = int(line)
+            m = m  + 1
         else:
             grid.append(line)
 
