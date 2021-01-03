@@ -173,23 +173,23 @@ def DFS(x,y):
             visited.add((x, y))  # add cell to visited list
 
         if (x, y - 24) in path and (x, y - 24) not in visited:  # check the cell down
+             cell = (x , y - 24)
+             solution[cell] = x, y
+             frontier.append(cell)
+             visited.add((x , y - 24))
+             print(solution)
+
+        if(x + 24, y) in path and (x + 24, y) not in visited:   # check the cell on the  right
             cell = (x + 24, y - 24)
             solution[cell] = x, y
             frontier.append(cell)
-            visited.add((x x + 24, y - 24))
-            print(solution)
-
-        if(x + 24, y) in path and (x + 24, y) not in visited:   # check the cell on the  right
-            cell = (x + 24, y)
-            solution[cell] = x, y
-            frontier.append(cell)
-            visited.add((x +24, y))
+            visited.add((x +24, y - 24))
 
         if(x, y + 24) in path and (x, y + 24) not in visited:  # check the cell up
-            cell = (x, y + 24)
-            solution[cell] = x, y
-            frontier.append(cell)
-            visited.add((x, y + 24))
+             cell = (x, y + 24)
+             solution[cell] = x, y
+             frontier.append(cell)
+             visited.add((x, y + 24))
         green.goto(x,y)
 
 
@@ -260,5 +260,6 @@ E = Button(top,text="EXIT",command=endProgram)
 setup_maze(grid)
 B.pack()
 D.pack()
+E.pack()
 top.mainloop()
 wn.exitonclick()
