@@ -78,13 +78,13 @@ class Yellow(turtle.Turtle):
 
 
 
-def setup_maze(grid):                          # define a function called setup_maze
-    global start_x, start_y, end_x, end_y      # set up global variables for start and end locations
-    for y in range(len(grid)):                 # read in the grid line by line
+def setup_maze(grid,m):                          # define a function called setup_maze
+    global start_x, start_y, end_x, end_y      
+    for y in range(len(grid)):                 
         for x in range(len(grid[y])):          # read each cell in the line
-            character = grid[y][x]             # assign the varaible "character" the the x and y location od the grid
-            screen_x = -288 + (x * 24)         # move to the x location on the screen staring at -588
-            screen_y = 288 - (y * 24)          # move to the y location of the screen starting at 288
+            character = grid[y][x]             # "character" the the x and y location od the grid
+            screen_x = -288 + (x * 24)  # or x *(m*m)     ,margin x -288
+            screen_y = 288 - (y * 24 )  # or y *(m*m)     ,margin y  288
 
             if character == "+":
                 Pen.goto(screen_x, screen_y)         
@@ -92,7 +92,7 @@ def setup_maze(grid):                          # define a function called setup_
                 walls.append((screen_x, screen_y))    
 
             if character == " " or character == "e" or character == "g":
-                path.append((screen_x, screen_y))     # add " " and e to path list
+                path.append((screen_x, screen_y))     
 
             if character == "e":
                 draw.color("purple")
@@ -192,8 +192,7 @@ def backRoute(x, y):
     yellow.goto(x, y)
     yellow.stamp()
     while (x, y) != (start_x, start_y):    # stop loop when current cells == start cell
-        yellow.goto(solution[x , y])
-        # move the yellow sprite to the key value of solution ()
+        yellow.goto(solution[x , y]) # yellow move next cell
         yellow.stamp()
         x, y = solution[x, y]             # "key value" now becomes the new key
         Player.goto(solution[x, y])
@@ -237,7 +236,7 @@ with open("map.txt") as file:
             m = m  + 1
         else:
             grid.append(line)
-
+# buton new screen
 def BFS_SEARCH():
     BFS(start_x,start_y,n)
     backRoute(end_x, end_y)
@@ -252,8 +251,8 @@ B = Button(top,text="BFS",command=BFS_SEARCH)
 D = Button(top,text="DFS",command=DFS_SEARCH)
 E = Button(top,text="EXIT",command=endProgram)
 
-# main program starts here ####
-setup_maze(grid)
+# main program starts 
+setup_maze(grid,m)
 B.pack()
 D.pack()
 E.pack()
