@@ -15,16 +15,16 @@ wn.bgcolor("White")                # set the background colour
 wn.title("A BFS Maze Solving Program")
 wn.setup(1300,700)                  # setup the dimensions of the working window
 
-turtle.register_shape("IMG/motorbike.gif")
-turtle.register_shape("IMG/gas1.gif")
-turtle.register_shape("IMG/thewall.gif")
-turtle.register_shape("IMG/flag1.gif")
+turtle.register_shape("motorbike.gif")
+turtle.register_shape("gas1.gif")
+turtle.register_shape("thewall.gif")
+turtle.register_shape("flag1.gif")
 
 # this is the class for the Maze
 class Pen(turtle.Turtle):
     def __init__(self):
         turtle.Turtle.__init__(self)
-        self.shape("IMG/thewall.gif")
+        self.shape("thewall.gif")
         self.color("black")
         self.penup()
         self.speed(0)
@@ -32,7 +32,7 @@ class Pen(turtle.Turtle):
 class Gas(turtle.Turtle):
     def __init__(self):
         turtle.Turtle.__init__(self)
-        self.shape("IMG/gas1.gif")
+        self.shape("gas1.gif")
         self.color("gold")
         self.penup()
         self.speed(0)
@@ -48,7 +48,7 @@ class Gas(turtle.Turtle):
 class draw(turtle.Turtle):
     def __init__(self):
         turtle.Turtle.__init__(self)
-        self.shape("IMG/flag1.gif")
+        self.shape("flag1.gif")
         self.color("green")
         self.penup()
         self.speed(0)
@@ -66,7 +66,7 @@ class Green(turtle.Turtle):
 class Player(turtle.Turtle):
     def __init__(self):
         turtle.Turtle.__init__(self)
-        self.shape("IMG/motorbike.gif")
+        self.shape("motorbike.gif")
         #self.shape("IMG/MOTO.gif")
         self.color("blue")
         self.setheading(270)
@@ -92,23 +92,22 @@ def setup_maze(grid):                          # define a function called setup_
             screen_y = 288 - (y * 24)          # move to the y location of the screen starting at 288
 
             if character == "+":
-                Pen.goto(screen_x, screen_y)         # move pen to the x and y locaion and
-                Pen.stamp()                          # stamp a copy of the turtle on the screen
-                walls.append((screen_x, screen_y))    # add coordinate to walls list
+                Pen.goto(screen_x, screen_y)         
+                Pen.stamp()                          
+                walls.append((screen_x, screen_y))    
 
-            if character == " " or character == "e":
+            if character == " " or character == "e" or character == "g":
                 path.append((screen_x, screen_y))     # add " " and e to path list
 
             if character == "e":
                 draw.color("purple")
-                draw.goto(screen_x, screen_y)       # send green sprite to screen location
-                #end_x, end_y = screen_x,screen_y     # assign end locations variables to end_x and end_y
+                draw.goto(screen_x, screen_y)       
+                end_x, end_y = screen_x,screen_y     
                 draw.stamp()
                 draw.color("green")
                 
             if character == "g":
                  Gas.goto(screen_x,screen_y)
-                 end_x, end_y = screen_x,screen_y
                  Gas.stamp()
                  
                  
@@ -116,9 +115,8 @@ def setup_maze(grid):                          # define a function called setup_
                 start_x, start_y = screen_x, screen_y  # assign start locations variables to start_x and start_y
                 Player.goto(screen_x, screen_y)
                 
-            if character == "g":
-                end_x, end_y = screen_x, screen_y  # assign start locations variables to start_x and start_y
-                Gass.append(end_x,end_y)
+            
+                
 
 
 def endProgram():
