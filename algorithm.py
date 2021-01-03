@@ -1,9 +1,3 @@
-#####################################
-# Breadth First Search / Flood fill
-# Davis MT
-# 28.01.2018
-#####################################
-
 import turtle
 from tkinter import *
 import time
