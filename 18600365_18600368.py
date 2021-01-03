@@ -123,7 +123,7 @@ def endProgram():
     wn.exitonclick()
     sys.exit()
 
-def search(x,y,n):
+def BFS(x,y,n):
     frontier.append((x, y))
     solution[x,y] = x,y
 
@@ -158,6 +158,41 @@ def search(x,y,n):
         green.goto(x,y)
 
 
+def DFS(x,y):
+    frontier.append((x, y))
+    solution[x,y] = x,y
+
+    while len(frontier) > 0:          # exit while loop when frontier queue equals zero
+        time.sleep(0.2)
+        x, y = frontier.popleft()     # pop next entry in the frontier queue an assign to x and y location
+
+        if(x - 24, y) in path and (x - 24, y) not in visited:  # check the cell on the left
+            cell = (x, y)
+            solution[cell] = x, y    # backtracking routine [cell] is the previous cell. x, y is the current cell
+            frontier.append(cell)   # add cell to frontier list
+            visited.add((x, y))  # add cell to visited list
+
+        if (x, y - 24) in path and (x, y - 24) not in visited:  # check the cell down
+            cell = (x + 24, y - 24)
+            solution[cell] = x, y
+            frontier.append(cell)
+            visited.add((x x + 24, y - 24))
+            print(solution)
+
+        if(x + 24, y) in path and (x + 24, y) not in visited:   # check the cell on the  right
+            cell = (x + 24, y)
+            solution[cell] = x, y
+            frontier.append(cell)
+            visited.add((x +24, y))
+
+        if(x, y + 24) in path and (x, y + 24) not in visited:  # check the cell up
+            cell = (x, y + 24)
+            solution[cell] = x, y
+            frontier.append(cell)
+            visited.add((x, y + 24))
+        green.goto(x,y)
+
+
 def backRoute(x, y):
     yellow.goto(x, y)
     yellow.stamp()
@@ -169,6 +204,17 @@ def backRoute(x, y):
         Player.goto(solution[x, y])
         time.sleep(0.2)
 
+def nextRoute(x, y):
+    yellow.goto(x, y)
+    yellow.stamp()
+    while (x, y) != (end_x, end_y):
+        yellow.goto(solution[x , y])
+        x, y = solution[x , y]  
+        yellow.stamp()
+        Player.goto(solution[x,y])
+        time.sleep(0.2)
+
+    
         
 # set up classes
 Pen = Pen()
@@ -197,14 +243,22 @@ with open("map.txt") as file:
             grid.append(line)
 
 def BFS_SEARCH():
-    search(start_x,start_y,n)
+    BFS(start_x,start_y,n)
     backRoute(end_x, end_y)
+
+def DFS_SEARCH():
+    DFS(end_x,end_y)
+    nextRoute(start_x, start_y)
+
+
 top = Tk()
 B = Button(top,text="BFS",command=BFS_SEARCH)
-
+D = Button(top,text="DFS",command=DFS_SEARCH)
+E = Button(top,text="EXIT",command=endProgram)
 
 # main program starts here ####
 setup_maze(grid)
 B.pack()
+D.pack()
 top.mainloop()
 wn.exitonclick()
