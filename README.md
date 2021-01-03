@@ -1,5 +1,5 @@
 # algorithm-maze
-18600365 - Trần Đức Nhân TDN-git
+18600365 - Trần Đức Nhân - TDN-git
 
 18600386 - Trần Văn Trình
 
